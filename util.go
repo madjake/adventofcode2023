@@ -55,3 +55,18 @@ func matchRunes(r rune, lines []string) []runeMatch {
 
 	return runes
 }
+
+func substr(input string, start int, length int) string {
+	asRunes := []rune(input)
+
+	if start >= len(asRunes) {
+		return ""
+	}
+
+	end := start + length
+	if end > len(asRunes) {
+		end = len(asRunes)
+	}
+
+	return string(asRunes[start:end])
+}
