@@ -212,14 +212,14 @@ func day5() {
 		panic("Part 1: Full test case failed! Wrong number.")
 	}
 
-	lowest = day5Part2(day5TestInput)
-	fmt.Printf("Test input lowest location: %d\n", lowest)
+	// lowest = day5Part2(day5TestInput)
+	// fmt.Printf("Test input lowest location: %d\n", lowest)
 
-	if lowest != 46 {
-		panic("Part 2: Simple test case failed!")
-	}
-	lowest = day5Part2(day5FullInput)
-	fmt.Printf("Full input lowest part 2: %d\n", lowest)
+	// if lowest != 46 {
+	// 	panic("Part 2: Simple test case failed!")
+	// }
+	// lowest = day5Part2(day5FullInput)
+	// fmt.Printf("Full input lowest part 2: %d\n", lowest)
 
 }
 
@@ -255,48 +255,48 @@ func day5Part1(input string) int {
 	return lowestLoc
 }
 
-func day5Part2(input string) int {
-	seeds, mappings := parseDay5Input(input)
+// func day5Part2(input string) int {
+// 	seeds, mappings := parseDay5Input(input)
 
-	mappingTypes := map[string][][]int{}
-	destinations := map[string][][]int{}
+// 	mappingTypes := map[string][][]int{}
+// 	destinations := map[string][][]int{}
 
-	seedRanges := [][]int{}
-	for i := 0; i < len(seeds); i++ {
-		if i+1 >= len(seeds) {
-			break
-		}
+// 	seedRanges := [][]int{}
+// 	for i := 0; i < len(seeds); i++ {
+// 		if i+1 >= len(seeds) {
+// 			break
+// 		}
 
-		num := seeds[i]
-		seedRanges = append(seedRanges, []int{num, num + seeds[i+1] - 1})
-		i++
-	}
+// 		num := seeds[i]
+// 		seedRanges = append(seedRanges, []int{num, num + seeds[i+1] - 1})
+// 		i++
+// 	}
 
-	for key, mapping := range mappings {
-		for _, v := range mapping {
-			mappingTypes[key] = append(mappingTypes[key], []int{v[1], v[1] + v[2] - 1})
-			destinations[key] = append(destinations[key], []int{v[0], v[0] + v[2] - 1})
-		}
-	}
+// 	for key, mapping := range mappings {
+// 		for _, v := range mapping {
+// 			mappingTypes[key] = append(mappingTypes[key], []int{v[1], v[1] + v[2] - 1})
+// 			destinations[key] = append(destinations[key], []int{v[0], v[0] + v[2] - 1})
+// 		}
+// 	}
 
-	order := []string{"seed-to-soil", "soil-to-fertilizer", "fertilizer-to-water", "water-to-light", "light-to-temperature", "temperature-to-humidity", "humidity-to-location"}
+// 	order := []string{"seed-to-soil", "soil-to-fertilizer", "fertilizer-to-water", "water-to-light", "light-to-temperature", "temperature-to-humidity", "humidity-to-location"}
 
-	lowestLoc := math.MaxInt64
-	for _, seedRange := range seedRanges {
-		for i := seedRange[0]; i < seedRange[1]; i++ {
-			currentLoc := i
-			for _, key := range order {
-				currentLoc = findLocation2(currentLoc, mappingTypes[key], destinations[key], minMaxes, key)
-			}
+// 	lowestLoc := math.MaxInt64
+// 	for _, seedRange := range seedRanges {
+// 		for i := seedRange[0]; i < seedRange[1]; i++ {
+// 			currentLoc := i
+// 			for _, key := range order {
+// 				currentLoc = findLocation2(currentLoc, mappingTypes[key], destinations[key], minMaxes, key)
+// 			}
 
-			if currentLoc < lowestLoc {
-				lowestLoc = currentLoc
-			}
-		}
-	}
+// 			if currentLoc < lowestLoc {
+// 				lowestLoc = currentLoc
+// 			}
+// 		}
+// 	}
 
-	return lowestLoc
-}
+// 	return lowestLoc
+// }
 
 func findLocation(seedToFind int, specificMapping [][]int, destinations [][]int) int {
 	loc := seedToFind
