@@ -17,6 +17,25 @@ type runeMatch struct {
 	y int
 }
 
+func parseNumbersFromLine(line string) []numberMatch {
+	re := regexp.MustCompile(`\d+`)
+
+	numbers := []numberMatch{}
+
+	matches := re.FindAllStringIndex(line, -1)
+
+	for _, match := range matches {
+		num, _ := strconv.Atoi(line[match[0]:match[1]])
+		numbers = append(numbers, numberMatch{
+			num: num,
+			x:   match[0],
+			y:   0,
+		})
+	}
+
+	return numbers
+}
+
 func matchNumbers(lines []string) []numberMatch {
 	re := regexp.MustCompile(`\d+`)
 
